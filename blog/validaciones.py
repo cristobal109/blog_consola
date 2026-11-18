@@ -1,40 +1,36 @@
 """Reglas lógicas y validaciones del blog."""
 
-from blog.datos import estados_post
-
-CLAVES_REQUERIDAS = ("titulo", "contenido", "autor", "tags", "estado")
+ESTADOS_POST = ("borrador", "publicado", "archivado")
 
 
 def validar_post(post):
-    """Valida la estructura de un post.
+    """Valida que un objeto Post tenga datos correctos.
 
     Retorna una tupla (es_valido, lista_de_errores).
     """
+    # Import local para evitar una importación circular con modelos.py
+    from blog.modelos import Autor, Post
+
+    if not isinstance(post, Post):
+        return False, ["No es un objeto Post."]
+
     errores = []
 
-    if not isinstance(post, dict):
-        return False, ["El post no es un diccionario."]
-
-    for clave in CLAVES_REQUERIDAS:
-        if clave not in post:
-            errores.append(f"Falta la clave '{clave}'.")
-
-    if not str(post.get("titulo", "")).strip():
+    if not str(post.titulo).strip():
         errores.append("El título está vacío.")
 
-    if not str(post.get("contenido", "")).strip():
+    if not str(post.contenido).strip():
         errores.append("El contenido está vacío.")
 
-    autor = post.get("autor")
-    if not isinstance(autor, dict):
-        errores.append("El autor debe ser un diccionario.")
-    elif not str(autor.get("nombre", "")).strip():
+    if not isinstance(post.autor, Autor):
+        errores.append("El autor debe ser un objeto Autor.")
+    elif not str(post.autor.nombre).strip():
         errores.append("El autor no tiene nombre.")
 
-    if not isinstance(post.get("tags"), list):
+    if not isinstance(post.tags, list):
         errores.append("Los tags deben ser una lista.")
 
-    if post.get("estado") not in estados_post:
-        errores.append(f"Estado inválido: '{post.get('estado')}'.")
+    if post.estado not in ESTADOS_POST:
+        errores.append(f"Estado inválido: '{post.estado}'.")
 
     return len(errores) == 0, errores

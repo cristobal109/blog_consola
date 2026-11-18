@@ -1,34 +1,25 @@
-"""Operaciones principales del blog: listar, buscar y filtrar."""
+"""Operaciones de salida: muestran en pantalla lo que devuelve la clase Blog."""
 
 
-def mostrar_post(post):
-    """Imprime título, autor y estado de un post."""
-    autor = post.get("autor")
-    nombre = autor.get("nombre", "Sin nombre") if isinstance(autor, dict) else "Autor inválido"
-    print(f"- {post.get('titulo') or '(sin título)'} | Autor: {nombre} | Estado: {post.get('estado')}")
-
-
-def listar_posts(lista):
-    """Muestra todos los posts de la lista recibida."""
+def mostrar_posts(lista):
+    """Muestra título, autor y estado de cada Post de la lista."""
     if not lista:
         print("No hay posts para mostrar.")
         return
     for post in lista:
-        mostrar_post(post)
+        print(f"- {post}")
 
 
-def buscar_por_titulo(lista, termino):
-    """Retorna los posts cuyo título contiene el término (ignora mayúsculas)."""
-    termino = termino.lower()
-    return [p for p in lista if termino in str(p.get("titulo", "")).lower()]
-
-
-def filtrar_por_tag(lista, tag):
-    """Retorna los posts que tienen el tag indicado (ignora mayúsculas)."""
-    tag = tag.lower()
-    resultado = []
-    for post in lista:
-        tags = post.get("tags", [])
-        if isinstance(tags, list) and tag in [t.lower() for t in tags]:
-            resultado.append(post)
-    return resultado
+def mostrar_validacion(resultados):
+    """Muestra el resultado de Blog.validar_posts()."""
+    if not resultados:
+        print("No hay posts para validar.")
+        return
+    for post, es_valido, errores in resultados:
+        nombre = post.titulo or f"Post #{post.id}"
+        if es_valido:
+            print(f"✔ {nombre}: válido")
+        else:
+            print(f"✘ {nombre}: con errores")
+            for error in errores:
+                print(f"    - {error}")
