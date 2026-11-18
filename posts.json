@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "titulo": "Mi primer script en Python",
+        "contenido": "Hoy configuré el entorno y ejecuté mi primer script.",
+        "autor": {
+            "nombre": "Cristóbal Pérez",
+            "bio": "Estudiante de marketing que aprende Python.",
+            "email": "cristobal@example.com"
+        },
+        "tags": ["python", "programacion"],
+        "estado": "publicado"
+    },
+    {
+        "id": 2,
+        "titulo": "Listas y diccionarios",
+        "contenido": "Cómo modelar los datos de un blog con estructuras de Python.",
+        "autor": {
+            "nombre": "Cristóbal Pérez",
+            "bio": "Estudiante de marketing que aprende Python.",
+            "email": "cristobal@example.com"
+        },
+        "tags": ["python"],
+        "estado": "publicado"
+    },
+    {
+        "id": 3,
+        "titulo": "Marketing digital e IA",
+        "contenido": "Ideas sobre cómo la IA cambia el marketing.",
+        "autor": {
+            "nombre": "Cristóbal Pérez",
+            "bio": "Estudiante de marketing que aprende Python.",
+            "email": "cristobal@example.com"
+        },
+        "tags": ["marketing", "ia"],
+        "estado": "borrador"
+    },
+    {
+        "id": 4,
+        "titulo": "",
+        "contenido": "Post incompleto de prueba (tiene errores a propósito para probar las validaciones).",
+        "autor": {
+            "nombre": "Ana López",
+            "bio": "",
+            "email": ""
+        },
+        "tags": "web",
+        "estado": "pendiente"
+    }
+]
